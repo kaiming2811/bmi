@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
-import 'dart:math';//This is needed for the power function
+import 'dart:math';
+
+import 'info.dart';//This is needed for the power function
 
 void main() {
   runApp(const MyApp());
@@ -30,10 +32,10 @@ class MyApp extends StatelessWidget {
         //
         // This works for code too, not just values: Most code changes can be
         // tested with just a hot reload.
-        colorScheme: ColorScheme.fromSeed(seedColor: Colors.deepPurple),
+        colorScheme: ColorScheme.fromSeed(seedColor: Colors.orangeAccent),
         useMaterial3: true,
       ),
-      home: const MyHomePage(title: 'Flutter Demo Home Page'),
+      home: const MyHomePage(title: 'BMI'),
     );
   }
 }
@@ -92,6 +94,13 @@ class _MyHomePageState extends State<MyHomePage> {
         _bmiImage = 'assets/images/normal.png';
       }
     });
+  }
+
+  void _showInfo () {
+    Navigator.push(
+        context,
+        MaterialPageRoute(
+          builder: (context) => Info(bmi: _bmiOutput,),));
   }
 
   void _resetScreen() {
@@ -187,8 +196,16 @@ class _MyHomePageState extends State<MyHomePage> {
                   labelText: 'Enter height (cm)'
                 ),
               ),
-              const Expanded(
-                  child: SizedBox(height: double.infinity,)
+
+              //Insert an IconButton
+              IconButton(
+                icon: const Icon(Icons.info),
+                color: Colors.orangeAccent,
+                onPressed: _showInfo,
+
+              ),
+
+              Expanded(child: const SizedBox(height: double.infinity,)
               ),
               Row(
                 mainAxisAlignment: MainAxisAlignment.center,
